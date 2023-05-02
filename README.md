@@ -1,5 +1,6 @@
 # Lab_4
 Код програми:
+
 while True:
     
     file_path = input("Введіть шлях до файлу: ")
