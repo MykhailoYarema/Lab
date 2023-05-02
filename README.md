@@ -1,21 +1,47 @@
 # Lab_4
 Код програми:
-file_name = "example.txt"
-with open(file_name, 'r') as file:
-    lines = file.readlines()
-    num_lines = len(lines)
-    print("Кількість рядків:", num_lines)
-    num_empty_lines = lines.count('\n')
-    print("Кількість порожніх рядків", num_empty_lines)
-    num_lines_with_z = 0
-    for line in lines:
-        if 'z' in line:
-            num_lines_with_z += 1
-    print("Кількість рядків з літерою \"z\":", num_lines_with_z)
-    num_z = ''.join(lines).count('z')
-    print("Кількість літер \"z\" у файлі", num_z)
-    num_lines_with_and = 0
-    for line in lines:
-        if 'and' in line:
-            num_lines_with_and += 1
-    print("Кількість рядків з групою символів \"and\":", num_lines_with_and)
+while True:
+    
+    file_path = input("Введіть шлях до файлу: ")
+
+    try:
+      
+        with open(file_path, 'r') as f:
+            
+            total_lines = 0
+            empty_lines = 0
+            lines_with_z = 0
+            z_count = 0
+            lines_with_and = 0
+
+           
+            for line in f:
+                total_lines += 1
+
+               
+                if line.strip() == "":
+                    empty_lines += 1
+
+               
+                if "z" in line:
+                    lines_with_z += 1
+                    z_count += line.count("z")
+
+               
+                if "and" in line:
+                    lines_with_and += 1
+
+          
+            print(f"Кількість рядків: {total_lines}")
+            print(f"Кількість порожніх рядків: {empty_lines}")
+            print(f"Кількість рядків з літерою 'z': {lines_with_z}")
+            print(f"Кількість літер 'z' у файлі: {z_count}")
+            print(f"Кількість рядків з групою символів 'and': {lines_with_and}")
+
+    except FileNotFoundError:
+        print("Файл не знайдено.")
+
+  
+    choice = input("Хочете проаналізувати інший файл? (y/n): ")
+    if choice.lower() != "y":
+        break
