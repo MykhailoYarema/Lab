@@ -1,48 +1,40 @@
-# Lab_4
+# Lab_6
+
 Код програми:
 
+import math
+
+#Запитуємо користувача про завдання та їх оцінки
+
+tasks = []
 while True:
-    
-    file_path = input("Введіть шлях до файлу: ")
-
-    try:
-      
-        with open(file_path, 'r') as f:
-            
-            total_lines = 0
-            empty_lines = 0
-            lines_with_z = 0
-            z_count = 0
-            lines_with_and = 0
-
-           
-            for line in f:
-                total_lines += 1
-
-               
-                if line.strip() == "":
-                    empty_lines += 1
-
-               
-                if "z" in line:
-                    lines_with_z += 1
-                    z_count += line.count("z")
-
-               
-                if "and" in line:
-                    lines_with_and += 1
-
-          
-            print(f"Кількість рядків: {total_lines}")
-            print(f"Кількість порожніх рядків: {empty_lines}")
-            print(f"Кількість рядків з літерою 'z': {lines_with_z}")
-            print(f"Кількість літер 'z' у файлі: {z_count}")
-            print(f"Кількість рядків з групою символів 'and': {lines_with_and}")
-
-    except FileNotFoundError:
-        print("Файл не знайдено.")
-
-  
-    choice = input("Хочете проаналізувати інший файл? (y/n): ")
-    if choice.lower() != "y":
+    a = float(input("Введіть оцінку a для завдання: "))
+    m = float(input("Введіть оцінку m для завдання: "))
+    b = float(input("Введіть оцінку b для завдання: "))
+    tasks.append((a, m, b))
+    more_tasks = input("Хочете додати ще завдання? (y/n): ")
+    if more_tasks.lower() == 'n':
         break
+
+#Обчислюємо оцінки та стандартні відхилення для кожного завдання
+
+estimates = []
+for task in tasks:
+    a, m, b = task
+    e = (a + 4 * m + b) / 6
+    sd = (b - a) / 6
+    estimates.append((e, sd))
+
+#Обчислюємо оцінку та стандартне відхилення для проекту
+
+project_e = sum([e[0] for e in estimates])
+project_sd = math.sqrt(sum([e[1]**2 for e in estimates]))
+
+#Обчислюємо довірчий інтервал для проекту
+
+ci_min = project_e - 2 * project_sd
+ci_max = project_e + 2 * project_sd
+
+#Виводимо результат
+
+print("Project's 95% confidence interval: {} ... {} points".format(ci_min, ci_max))
