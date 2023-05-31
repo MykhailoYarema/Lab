@@ -4,7 +4,6 @@
 
 import math
 
-#Запитуємо користувача про завдання та їх оцінки
 
 tasks = []
 while True:
@@ -16,7 +15,6 @@ while True:
     if more_tasks.lower() == 'n':
         break
 
-#Обчислюємо оцінки та стандартні відхилення для кожного завдання
 
 estimates = []
 for task in tasks:
@@ -25,16 +23,13 @@ for task in tasks:
     sd = (b - a) / 6
     estimates.append((e, sd))
 
-#Обчислюємо оцінку та стандартне відхилення для проекту
 
 project_e = sum([e[0] for e in estimates])
 project_sd = math.sqrt(sum([e[1]**2 for e in estimates]))
 
-#Обчислюємо довірчий інтервал для проекту
 
 ci_min = project_e - 2 * project_sd
 ci_max = project_e + 2 * project_sd
 
-#Виводимо результат
 
 print("Project's 95% confidence interval: {} ... {} points".format(ci_min, ci_max))
