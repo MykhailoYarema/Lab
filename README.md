@@ -1,48 +1,11 @@
-# Lab_4
+# Lab_3
 Код програми:
 
-while True:
-    
-    file_path = input("Введіть шлях до файлу: ")
+Код програми:
+numbers = [1, 2, 3, 4, 5, 5, 6, 7]
 
-    try:
-      
-        with open(file_path, 'r') as f:
-            
-            total_lines = 0
-            empty_lines = 0
-            lines_with_z = 0
-            z_count = 0
-            lines_with_and = 0
+for i in range(len(numbers)):
+    for j in range(i+1, len(numbers)):
+        if numbers[i] + numbers [i] == 10:
+            print(numbers[i], numbers[i])
 
-           
-            for line in f:
-                total_lines += 1
-
-               
-                if line.strip() == "":
-                    empty_lines += 1
-
-               
-                if "z" in line:
-                    lines_with_z += 1
-                    z_count += line.count("z")
-
-               
-                if "and" in line:
-                    lines_with_and += 1
-
-          
-            print(f"Кількість рядків: {total_lines}")
-            print(f"Кількість порожніх рядків: {empty_lines}")
-            print(f"Кількість рядків з літерою 'z': {lines_with_z}")
-            print(f"Кількість літер 'z' у файлі: {z_count}")
-            print(f"Кількість рядків з групою символів 'and': {lines_with_and}")
-
-    except FileNotFoundError:
-        print("Файл не знайдено.")
-
-  
-    choice = input("Хочете проаналізувати інший файл? (y/n): ")
-    if choice.lower() != "y":
-        break
